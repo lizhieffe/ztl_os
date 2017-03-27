@@ -26,3 +26,5 @@ bochslog.txt
 os.iso
 
 out/
+
+*.img

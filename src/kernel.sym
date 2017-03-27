@@ -1,7 +1,7 @@
 80100000 .text
-801036e4 .rodata
-80103ac8 .stab
-80103ac9 .stabstr
+80103704 .rodata
+80103ae8 .stab
+80103ae9 .stabstr
 80104000 .data
 80105120 .bss
 00000000 .debug_line
@@ -18,7 +18,7 @@
 80105158 panicked
 801003e0 consputc
 80100570 printint
-8010375c digits.1364
+8010377c digits.1366
 00000000 file.c
 00000000 fs.c
 80100d60 balloc
@@ -35,7 +35,7 @@
 00000000 kalloc.c
 00000000 lapic.c
 80102110 fill_rtcdate
-801051b4 n.1313
+801051b4 n.1315
 00000000 log.c
 80102500 install_trans
 801025a0 write_head
@@ -45,7 +45,7 @@
 80105000 irqmask
 00000000 pipe.c
 00000000 proc.c
-80103a74 states.1316
+80103a94 states.1318
 00000000 sleeplock.c
 00000000 spinlock.c
 00000000 string.c
@@ -133,6 +133,7 @@
 80104000 data
 80103280 memset
 80102920 main
+801036f0 switchkvm
 80102850 log_write
 80102fd0 acquiresleep
 8010508c _binary_entryother_start

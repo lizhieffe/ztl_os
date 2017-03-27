@@ -2,6 +2,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "types.h"
+#include "x86.h"
 
 // TODO(lizhi): how??
 extern char data[];  // defined by kernel.ld
@@ -114,6 +115,13 @@ pde_t* setupkvm(void) {
 // scheduler processes.
 void kvmalloc(void) {
   kpgdir = setupkvm();
+  switchkvm();
+}
+
+// Switch h/w page table register to the kernel-only page table, for when no
+// process is running.
+void switchkvm(void) {
+  lcr3(V2P(kpgdir));   // switch to the kernel page table
 }
 
 //PAGEBREAK!
