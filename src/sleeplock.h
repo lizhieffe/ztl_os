@@ -1,10 +1,15 @@
-// Long-term locks for processes
-struct sleeplock {
-  uint locked;       // Is the lock held?
-  struct spinlock lk; // spinlock protecting this sleep lock
-  
-  // For debugging:
-  char *name;        // Name of lock.
-  int pid;           // Process holding lock
-};
+// Long-term lock for processes
 
+#include "spinlock.h"
+#include "types.h"
+
+struct sleeplock {
+  uint locked;
+
+  // spinlock protecting this sleep lock
+  struct spinlock lock;
+  
+  // for debugging
+  char* name;
+  int pid;
+};

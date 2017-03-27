@@ -1,56 +1,39 @@
 // Sleeping locks
 
-#include "types.h"
 #include "defs.h"
-#include "param.h"
-#include "x86.h"
-#include "memlayout.h"
-#include "mmu.h"
 #include "proc.h"
-#include "spinlock.h"
 #include "sleeplock.h"
 
-void
-initsleeplock(struct sleeplock *lk, char *name)
-{
-  initlock(&lk->lk, "sleep lock");
-  lk->name = name;
-  lk->locked = 0;
-  lk->pid = 0;
+void initsleeplock(struct sleeplock* lock, char* name) {
+  initlock(&lock->lock, name);
+  lock->name = name;
+  lock->locked = 0;
+  lock->pid = 0;
 }
 
-void
-acquiresleep(struct sleeplock *lk)
-{
-  acquire(&lk->lk);
-  while (lk->locked) {
-    sleep(lk, &lk->lk);
+void acquiresleep(struct sleeplock* lock) {
+  acquire(&lock->lock);
+  while (lock->locked) {
+    sleep(lock, &lock->lock);
   }
-  lk->locked = 1;
-  lk->pid = proc->pid;
-  release(&lk->lk);
+  lock->locked = 1;
+  lock->pid = proc->pid;
+  release(&lock->lock);
 }
 
-void
-releasesleep(struct sleeplock *lk)
-{
-  acquire(&lk->lk);
-  lk->locked = 0;
-  lk->pid = 0;
-  wakeup(lk);
-  release(&lk->lk);
+void releasesleep(struct sleeplock* lock) {
+  acquire(&lock->lock);
+  lock->locked = 0;
+  lock->pid = 0;
+  wakeup(lock);
+  release(&lock->lock);
 }
 
-int
-holdingsleep(struct sleeplock *lk)
-{
+// Return 0 when the |lock| is not hold by any process. Otherwise return 1.
+int holdingsleep(struct sleeplock* lock) {
   int r;
-  
-  acquire(&lk->lk);
-  r = lk->locked;
-  release(&lk->lk);
+  acquire(&lock->lock);
+  r = lock->locked;
+  release(&lock->lock);
   return r;
 }
-
-
-

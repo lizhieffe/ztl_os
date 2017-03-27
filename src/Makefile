@@ -1,23 +1,26 @@
 OBJS = \
+	bio.o\
+	console.o\
+	file.o\
+	fs.o\
+	ide.o\
+	ioapic.o\
+	kalloc.o\
+  lapic.o\
+	log.o\
 	main.o\
-#	bio.o\
-#	console.o\
+	mp.o\
+	picirq.o\
+	pipe.o\
+	proc.o\
+	sleeplock.o\
+	spinlock.o\
+	string.o\
+	uart.o\
+	vm.o\
 #	exec.o\
-#	file.o\
-#	fs.o\
-#	ide.o\
-#	ioapic.o\
-#	kalloc.o\
 #	kbd.o\
-#	lapic.o\
-#	log.o\
 #	mp.o\
-#	picirq.o\
-#	pipe.o\
-#	proc.o\
-#	sleeplock.o\
-#	spinlock.o\
-#	string.o\
 #	swtch.o\
 #	syscall.o\
 #	sysfile.o\
@@ -25,9 +28,7 @@ OBJS = \
 #	timer.o\
 #	trapasm.o\
 #	trap.o\
-#	uart.o\
 #	vectors.o\
-#	vm.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf

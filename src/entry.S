@@ -48,7 +48,7 @@ entry:
   orl     $(CR4_PSE), %eax
   movl    %eax, %cr4
   # Set page directory
-  movl    $(V2P_WO(entrypgdir)), %eax
+  movl    $(V2P_WO(entrypgdir)), %eax # physical address
   movl    %eax, %cr3
   # Turn on paging.
   movl    %cr0, %eax
@@ -56,6 +56,8 @@ entry:
   movl    %eax, %cr0
 
   # Set up the stack pointer.
+  #
+  # TODO(lizhi): what is stack's value?
   movl $(stack + KSTACKSIZE), %esp
 
   # Jump to main(), and switch to executing at

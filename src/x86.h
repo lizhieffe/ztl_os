@@ -91,6 +91,7 @@ ltr(ushort sel)
   asm volatile("ltr %0" : : "r" (sel));
 }
 
+// Return the value of EFLAGS register
 static inline uint
 readeflags(void)
 {
@@ -117,6 +118,8 @@ sti(void)
   asm volatile("sti");
 }
 
+// atomic exchange the value on addres |addr| to newval and return the old value
+// on address |addr|.
 static inline uint
 xchg(volatile uint *addr, uint newval)
 {

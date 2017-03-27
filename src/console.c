@@ -2,8 +2,9 @@
 // Input is from the keyboard or serial port.
 // Output is written to the screen and serial port.
 
-#include "types.h"
 #include "defs.h"
+#include "proc.h"
+#include "types.h"
 #include "param.h"
 #include "traps.h"
 #include "spinlock.h"
@@ -12,7 +13,6 @@
 #include "file.h"
 #include "memlayout.h"
 #include "mmu.h"
-#include "proc.h"
 #include "x86.h"
 
 static void consputc(int);
@@ -171,9 +171,13 @@ consputc(int c)
   }
 
   if(c == BACKSPACE){
-    uartputc('\b'); uartputc(' '); uartputc('\b');
-  } else
+    // Moves the cursor backward, but doesn't erase what's there.
+    uartputc('\b');
+    uartputc(' ');
+    uartputc('\b');
+  } else {
     uartputc(c);
+  }
   cgaputc(c);
 }
 

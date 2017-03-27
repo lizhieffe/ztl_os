@@ -16,6 +16,9 @@ extern char end[]; // first address after kernel loaded from ELF file
 // doing some setup required for memory allocator to work.
 int
 main(void) {
+  // end to 4MB.
+  kinit1(end, P2V(4*1024*1024));
+  kvmalloc();
   return 0;
 }
 
